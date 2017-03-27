@@ -2,20 +2,30 @@ import React, { Component } from 'react';
 
 export default class Account extends Component {
   constructor (props) {
-    super ()
+    super (props)
     this.state={
       balance: 0
     }
   }
+
   handleDepositClick (e) {
     e.preventDefault();
-    let amount = +this.refs.myAmount.value
+    let amount = +this.refs.myAmount.value;
     let newBalance = this.state.balance + amount;
-    console.log(amount);
     this.setState({
       balance: newBalance
     });
     this.refs.myAmount.value = '';
+  }
+
+  handleWithdrawClick (e) {
+    e.preventDefault();
+    let amount = +this.refs.myAmount.value;
+    let newBalance = this.state.balance - amount;
+    this.setState({
+      balance: newBalance
+    });
+    this.refs.myAmount.value='';
   }
 
   render() {
@@ -25,7 +35,7 @@ export default class Account extends Component {
         <div className="balance">{this.state.balance}</div>
         <input ref="myAmount" type="text" placeholder="enter an amount" />
         <input type="button" value="Deposit" onClick={(e)=>this.handleDepositClick(e)}/>
-        <input type="button" value="Withdraw" />
+        <input type="button" value="Withdraw" onClick={(e)=>this.handleWithdrawClick(e)}/>
       </div>
     )
   }
