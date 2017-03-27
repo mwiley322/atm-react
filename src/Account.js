@@ -22,6 +22,9 @@ export default class Account extends Component {
     e.preventDefault();
     let amount = +this.refs.myAmount.value;
     let newBalance = this.state.balance - amount;
+    if (newBalance < 0) {
+      newBalance = 0;
+    } 
     this.setState({
       balance: newBalance
     });
